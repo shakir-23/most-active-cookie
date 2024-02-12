@@ -14,7 +14,7 @@ class MostActiveCookie:
         self.DATE_FLAG = ""
         self.DATE = ""
 
-    def main(self, args):
+    def begin(self, args):
         if len(args) != 5:
             print(self.ERROR_MSG_INCORRECT_USAGE)
             return
@@ -86,4 +86,4 @@ class MostActiveCookie:
 
 if __name__ == "__main__":
     most_active_cookie = MostActiveCookie()
-    most_active_cookie.main(sys.argv)
+    most_active_cookie.begin(sys.argv)
