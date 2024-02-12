@@ -4,8 +4,10 @@ from datetime import datetime
 from cookie_id_time_pair import CookieIDTimePair
 
 class MostActiveCookie:
-    ERROR_MSG_INCORRECT_FLAG = "Incorrect usage. Please use the proper flag (-d)."
-    ERROR_MSG_INCORRECT_USAGE = "Incorrect usage. \nPlease follow this format: ./most_active_cookie [filename] [-d] [date]"
+    ERROR_MSG_INCORRECT_FILE_DATE_FLAGS = "Incorrect usage. Please use the proper file and date flags (-f and -d)"
+    ERROR_MSG_INCORRECT_FILE_FLAG = "Incorrect usage. Please use the proper file flag -f"
+    ERROR_MSG_INCORRECT_DATE_FLAG = "Incorrect usage. Please use the proper date flag -d"
+    ERROR_MSG_INCORRECT_USAGE = "Incorrect usage. \nPlease follow this format: ./most_active_cookie -f [filename] [-d] [date]"
     formatter = "%Y-%m-%d"
 
     def __init__(self):
@@ -24,8 +26,7 @@ class MostActiveCookie:
         self.DATE_FLAG = args[3]
         self.DATE = args[4]
 
-        if self.DATE_FLAG != "-d" or self.FILE_FLAG != "-f":
-            print(self.ERROR_MSG_INCORRECT_FLAG)
+        if not self.are_flags_valid():
             return
 
         try:
@@ -35,7 +36,22 @@ class MostActiveCookie:
             print(f"Error: File {self.FILENAME} not found.")
         except Exception as e:
             print(str(e))
+    
+    def are_flags_valid(self):
+        if self.FILE_FLAG != "-f" and self.DATE_FLAG != "-d":
+            print(self.ERROR_MSG_INCORRECT_FILE_DATE_FLAGS)
+            return False
 
+        elif self.FILE_FLAG != "-f":
+            print(self.ERROR_MSG_INCORRECT_FILE_FLAG)
+            return False
+
+        elif self.DATE_FLAG != "-d":
+            print(self.ERROR_MSG_INCORRECT_DATE_FLAG)
+            return False
+
+        return True
+    
     def parse_csv(self, filename):
         parsed_csv = {}
 
@@ -68,21 +84,21 @@ class MostActiveCookie:
         return cookie_id_date_pair_obj
 
     def print_most_common_cookie(self, same_date_cookies_freq):
-        to_print = set()
+        most_common_cookies = set()
         max_value = 0
 
-        for key, value in same_date_cookies_freq.items():
-            if value == max_value:
-                to_print.add(key)
-            elif value > max_value:
-                to_print.clear()
-                max_value = value
-                to_print.add(key)
+        for cookie_id, freq in same_date_cookies_freq.items():
+            if freq == max_value:
+                most_common_cookies.add(cookie_id)
+            elif freq > max_value:
+                most_common_cookies.clear()
+                max_value = freq
+                most_common_cookies.add(cookie_id)
 
-        for cookie in to_print:
+        for cookie in most_common_cookies:
             print(cookie)
 
-        return to_print
+        return most_common_cookies
 
 if __name__ == "__main__":
     most_active_cookie = MostActiveCookie()
