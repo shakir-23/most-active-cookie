@@ -32,6 +32,16 @@ class TestMostActiveCookie(unittest.TestCase):
         self.most_active_cookie.DATE_FLAG = "-x"
         self.assertFalse(self.most_active_cookie.are_flags_valid())
 
+    def test_is_date_valid_correct_format(self):
+        # Test correct date format.
+        self.most_active_cookie.DATE = "2024-02-09"
+        self.assertTrue(self.most_active_cookie.is_date_valid())
+
+    def test_is_date_valid_incorrect_format(self):
+        # Test incorrect date format.
+        self.most_active_cookie.DATE = "09-02-2024"  # Incorrect format
+        self.assertFalse(self.most_active_cookie.is_date_valid())
+
     def test_is_same_date_false(self):
         # Test is_same_date() on True case.
         d1 = date(2021, 1, 1)

@@ -31,6 +31,10 @@ class MostActiveCookie:
         if not self.are_flags_valid():
             return
 
+        # if date is not valid, then return.
+        if not self.is_date_valid():
+            return
+
         try:
             # parse the csv file.
             same_date_cookies_freq = self.parse_csv(self.FILENAME) # parse_csv returns cookie frequency map.
@@ -58,7 +62,19 @@ class MostActiveCookie:
             return False
 
         return True
-    
+
+    def is_date_valid(self):
+        # checks whether date is valid and is in correct format or not.
+
+        try:
+            datetime.strptime(self.DATE, "%Y-%m-%d")
+        except ValueError:
+            # Date string is not in the correct format
+            print("Error: Date is not in the correct format. Please use the format YYYY-MM-DD.")
+            return False
+
+        return True
+
     def parse_csv(self, filename):
         # This method parses the csv file and also handle edge cases like File Not Found 
         # or Incorrect File Format and raises exception accordingly. 
