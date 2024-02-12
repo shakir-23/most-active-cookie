@@ -12,7 +12,7 @@ The program itself can be executed with the following command:
 ```./most_active_cookie_script -f [filename] -d [date]```
 
 ## Methods used and their usage
-- begin()-> This is just the main/entry function of the class.
+- begin()-> This is just the main/entry method of the class.
 - parse_csv(filename)-> This method just parses the csv file and returns the cookie frequency mapping.
 - are_flags_valid()-> This method checks whether the flags are valid or not.
 - is_same_date(input_date, target_date)-> Checks whether the two dates provided are same or not.
