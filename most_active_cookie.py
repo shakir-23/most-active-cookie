@@ -7,7 +7,7 @@ class MostActiveCookie:
     ERROR_MSG_INCORRECT_FILE_DATE_FLAGS = "Incorrect usage. Please use the proper file and date flags (-f and -d)"
     ERROR_MSG_INCORRECT_FILE_FLAG = "Incorrect usage. Please use the proper file flag -f"
     ERROR_MSG_INCORRECT_DATE_FLAG = "Incorrect usage. Please use the proper date flag -d"
-    ERROR_MSG_INCORRECT_USAGE = "Incorrect usage. \nPlease follow this format: ./most_active_cookie -f [filename] [-d] [date]"
+    ERROR_MSG_INCORRECT_USAGE = "Incorrect usage. \nPlease follow this format: ./most_active_cookie -f [filename] -d [date]"
     formatter = "%Y-%m-%d"
 
     def __init__(self):
